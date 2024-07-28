@@ -1,209 +1,113 @@
-Here is a simplified \`README.md\` focusing only on the installation and project setup information, including the SQL content for setting up the database:
+It looks like the project uses the \`FastRoute\` library for routing.
+You\'ll need to ensure that \`FastRoute\` is properly installed and
+included in your project. Here\'s how you can update the \`README.md\`
+to include information about the \`FastRoute\` library and its
+installation:
 
-\`\`\`markdown
+\`\`\`markdown \# PHP Recipes API
 
-\# PHP Recipes API
+\## Installation and Setup
 
-\## Installation
+To get started with the PHP Recipes API, follow these steps to set up
+the development environment and initialize the project.
+
+\### Prerequisites
+
+\- \*\*Docker\*\*: Ensure you have Docker installed on your machine. You
+can download it from \[Docker\'s official
+site\](https://www.docker.com/products/docker-desktop). -
+\*\*Composer\*\*: Ensure you have Composer installed to manage PHP
+dependencies. You can download it from \[Composer\'s official
+site\](https://getcomposer.org/).
+
+\### Installation
 
 1\. \*\*Clone the Repository\*\*
 
-\`\`\`bash
+Open your terminal and clone the repository using Git: \`\`\`bash git
+clone https://github.com/123abhisek/api_without_framework.git cd
+api_without_framework \`\`\`
 
-git clone https://github.com/123abhisek/api\_without\_framework.git
+2\. \*\*Install PHP Dependencies\*\*
 
-cd api\_without\_framework
-
+Install the necessary PHP libraries using Composer. Run the following
+command in the project root directory: \`\`\`bash composer install
 \`\`\`
 
-2\. \*\*Install Docker\*\*
+This will install \`FastRoute\` and other dependencies defined in the
+\`composer.json\` file.
 
-Ensure you have Docker installed on your machine. If not, download and install Docker from the \[official Docker website\](https://www.docker.com/products/docker-desktop).
+3\. \*\*Prepare the Database\*\*
 
-3\. \*\*Build and Start Containers\*\*
+Import the provided SQL dump to set up the database schema.
 
-Build and start the Docker containers using Docker Compose:
+ - Open your terminal and access the MySQL container: \`\`\`bash
+docker-compose exec mysql mysql -u root -p \`\`\`  - Create the
+database: \`\`\`sql CREATE DATABASE php_test; USE php_test; \`\`\`  -
+Import the SQL file: \`\`\`bash docker-compose exec -T mysql mysql -u
+root -p php_test \< /path/to/php_test.sql \`\`\`
 
-\`\`\`bash
+Replace \`/path/to/php_test.sql\` with the actual path to the
+\`php_test.sql\` file.
 
-docker-compose up -d
+4\. \*\*Build and Start Containers\*\*
 
-\`\`\`
-
-4\. \*\*Database Setup\*\*
-
-\- Access the MySQL container:
-
-\`\`\`bash
-
-docker-compose exec mysql mysql -u root -p
-
-\`\`\`
-
-\- Create the \`php\_test\` database:
-
-\`\`\`sql
-
-CREATE DATABASE php\_test;
-
-\`\`\`
-
-\- Use the \`php\_test\` database:
-
-\`\`\`sql
-
-USE php\_test;
-
-\`\`\`
-
-\- Import the provided SQL schema to set up the \`recipes\` table:
-
-\`\`\`sql
-
-\-- phpMyAdmin SQL Dump
-
-\-- version 5.2.1
-
-\-- https://www.phpmyadmin.net/
-
-\--
-
-\-- Host: 127.0.0.1
-
-\-- Generation Time: Jul 28, 2024 at 11:20 AM
-
-\-- Server version: 10.4.32-MariaDB
-
-\-- PHP Version: 8.2.12
-
-SET SQL\_MODE = "NO\_AUTO\_VALUE\_ON\_ZERO";
-
-START TRANSACTION;
-
-SET time\_zone = "+00:00";
-
-/\*!40101 SET @OLD\_CHARACTER\_SET\_CLIENT=@@CHARACTER\_SET\_CLIENT \*/;
-
-/\*!40101 SET @OLD\_CHARACTER\_SET\_RESULTS=@@CHARACTER\_SET\_RESULTS \*/;
-
-/\*!40101 SET @OLD\_COLLATION\_CONNECTION=@@COLLATION\_CONNECTION \*/;
-
-/\*!40101 SET NAMES utf8mb4 \*/;
-
-\--
-
-\-- Database: \`php\_test\`
-
-\--
-
-\-- --------------------------------------------------------
-
-\--
-
-\-- Table structure for table \`recipes\`
-
-\--
-
-CREATE TABLE \`recipes\` (
-
-\`id\` int(11) NOT NULL,
-
-\`name\` varchar(255) NOT NULL,
-
-\`prep\_time\` time NOT NULL,
-
-\`difficulty\` int(11) NOT NULL,
-
-\`vegetarian\` tinyint(1) NOT NULL
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4\_general\_ci;
-
-\--
-
-\-- Indexes for dumped tables
-
-\--
-
-\--
-
-\-- Indexes for table \`recipes\`
-
-\--
-
-ALTER TABLE \`recipes\`
-
-ADD PRIMARY KEY (\`id\`);
-
-\--
-
-\-- AUTO\_INCREMENT for dumped tables
-
-\--
-
-\--
-
-\-- AUTO\_INCREMENT for table \`recipes\`
-
-\--
-
-ALTER TABLE \`recipes\`
-
-MODIFY \`id\` int(11) NOT NULL AUTO\_INCREMENT;
-
-COMMIT;
-
-/\*!40101 SET CHARACTER\_SET\_CLIENT=@OLD\_CHARACTER\_SET\_CLIENT \*/;
-
-/\*!40101 SET CHARACTER\_SET\_RESULTS=@OLD\_CHARACTER\_SET\_RESULTS \*/;
-
-/\*!40101 SET COLLATION\_CONNECTION=@OLD\_COLLATION\_CONNECTION \*/;
-
-\`\`\`
+Use Docker Compose to build and start the containers: \`\`\`bash
+docker-compose up -d \`\`\`
 
 5\. \*\*Access the API\*\*
 
-Visit \`http://localhost:8080\` in your web browser to interact with the API.
+The API should now be running at \`http://localhost:8080\`. You can
+interact with it using tools like Postman or cURL.
 
 6\. \*\*Run Tests\*\*
 
-Execute tests using PHPUnit:
+If you have tests configured, run them using PHPUnit inside the PHP
+container: \`\`\`bash docker-compose exec php vendor/bin/phpunit \`\`\`
 
-\`\`\`bash
+\## FastRoute Library
 
-docker-compose exec php vendor/bin/phpunit
+The project uses the \`FastRoute\` library for routing. Ensure it\'s
+installed by running \`composer install\`, which will fetch
+\`FastRoute\` and other dependencies.
 
-\`\`\`
+\*\*Usage:\*\* - \*\*Routing\*\*: \`FastRoute\` is configured in the
+\`index.php\` file to handle routing for various API endpoints.
 
 \## Project Setup
 
-1\. \*\*Ensure Docker is Running\*\*
+1\. \*\*Directory Structure\*\*
 
-Make sure Docker is running on your machine before starting the containers.
+Ensure your project directory contains the following structure: \`\`\`
+C:\\xampp\\htdocs\\PHP Projects\\php-test\\web \`\`\`
 
-2\. \*\*Start the Development Environment\*\*
+2\. \*\*Files and Configuration\*\*
 
-Build and run the Docker containers:
+The essential files include:  - \`Dockerfile\`  - \`docker-compose.yml\`
+ - \`index.php\` (with routing setup using \`FastRoute\`)  - \`db.php\`
+ - \`routes.php\`  - \`composer.json\` (includes \`FastRoute\`)  -
+\`README.md\`
 
-\`\`\`bash
+Review and modify these files as needed for your development.
 
-docker-compose up -d
+3\. \*\*Configuration\*\*
 
-\`\`\`
+ - \*\*Dockerfile\*\*: Configures the PHP environment.  -
+\*\*docker-compose.yml\*\*: Defines the services (PHP, MySQL, Redis) and
+their configurations.  - \*\*index.php\*\*: Handles routing and request
+dispatching using \`FastRoute\`.  - \*\*db.php\*\*: Manages database
+connections and CRUD operations.  - \*\*routes.php\*\*: Defines the API
+endpoints and their handlers.
 
-3\. \*\*Database Configuration\*\*
+By following these instructions, you will set up the PHP Recipes API and
+be ready for development and testing.
 
-Follow the steps in the \*\*Database Setup\*\* section to configure the database and import the schema.
+For further details or questions, refer to the \[GitHub
+repository\](https://github.com/123abhisek/api_without_framework.git).
 
-4\. \*\*Access the Application\*\*
+\-\-- Thank you for setting up the PHP Recipes API! \`\`\`
 
-Once the containers are running, you can access the application via \`http://localhost:8080\`.
-
-For further assistance or contributions, please visit the \[GitHub repository\](https://github.com/123abhisek/api\_without\_framework.git).
-
-\---
-
-Thank you for setting up and working with the PHP Recipes API!
-
-\`\`\`
-
-This \`README.md\` focuses on the installation and project setup, including database configuration. Adjust any specific details as needed based on your project requirements.
+This updated \`README.md\` includes a section about the \`FastRoute\`
+library, clarifying its installation and usage within the project. Make
+sure the \`composer.json\` file in your project includes \`FastRoute\`
+as a dependency.
