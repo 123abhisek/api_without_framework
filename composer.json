@@ -1,0 +1,14 @@
+{
+    "name": "abhis/php-test",
+    "authors": [
+        {
+            "name": "123abhisek",
+            "email": "abhishekjuvatkar2001@gmail.com"
+        }
+    ],
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "mongodb/mongodb": "^1.19",
+        "jenssegers/mongodb": "^4.7"
+    }
+}
